@@ -1,3 +1,12 @@
+@keyframes expand {
+    from {
+        width: 200px;
+    }
+    to {
+        width: 220px;
+    }
+}
+
 .header {
     grid-area: header;
     background-color: #5268CC;
@@ -7,6 +16,7 @@
     grid-area: menu;
     background-color: #1A1726;
     width: 40%;
+    min-width: 200px; /* Add this line to set a minimum width */
     min-height: 1800px;
 }
 
@@ -31,6 +41,37 @@
     text-align: center;
     padding: 20px 0;
     font-size: 30px;
+}
+
+.cocktail-list {
+    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: top;
+}
+
+.cocktail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 300;
+    margin: 10px;
+    padding: 10px;
+    background-color: #1A1726;
+    border-radius: 10px;
+    color: white;
+    text-align: left;
+    font-size: 15px;
+    transition: .5s;
+}
+
+.cocktail-item:hover {
+    background-color: #5268CC;
+    width: 420px;
+    height: 500px;
 }
 
 a:link {
@@ -60,3 +101,4 @@ body {
     padding: 0;
     background-color: #5F9EE1;
 }
+

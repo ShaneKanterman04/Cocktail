@@ -26,16 +26,16 @@ function addCocktail(cocktail) {
   document.getElementsByClassName("cocktail-list")[0].appendChild(item)
   item.addEventListener("mouseover", () => { expand(item, expandedDiv) })
   item.addEventListener("mouseout", () => { collapse(item, expandedDiv) })
+  item.addEventListener("click", () => { saveRecipe(item) })
 }
 
 function getRandomCoctails(x) {
-  document.getElementsByClassName("cocktail-list")[0].innerHTML = ""
+  const headers = new Headers()
+  headers.append("Access-Control-Allow-Origin", "*")
   for (let i = 0; i < 60; i++) {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php", {
+      mode: 'cors',
       method: "GET",
-      header: "Access-Control-Allow-Origin: *",
-      header: "Access-Control-Allow-Methods: PUT, GET, POST",
-      header: "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept",
     })
       .then((response) => response.json())
       .then((data) => {
@@ -90,3 +90,17 @@ document.getElementById("refreshBtn").addEventListener("click", () => { getRando
 getRandomCoctails(60)
 
 
+document.getElementById('savedBtn').addEventListener('click', () => {
+  document.getElementsByClassName('cocktail-list')[0].innerHTML = ''
+  let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || []
+  savedCocktails.forEach(e => {
+    addCocktail(e)
+  });
+})
+
+function saveRecipe(item) {
+  let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || []
+  savedCocktails.push(item.data)
+  localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails))
+  console.log('saved');
+}

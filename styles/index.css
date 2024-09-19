@@ -74,6 +74,13 @@
     height: 500px;
 }
 
+.cocktail-item:active {
+    transition: .1s;
+    background-color: #ff0000;
+    width: 420px;
+    height: 500px;
+}
+
 a:link {
     text-decoration: none;
     color: #5268CC;

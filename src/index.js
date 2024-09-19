@@ -33,6 +33,9 @@ function getRandomCoctails(x) {
   for (let i = 0; i < 60; i++) {
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php", {
       method: "GET",
+      header: "Access-Control-Allow-Origin: *",
+      header: "Access-Control-Allow-Methods: PUT, GET, POST",
+      header: "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept",
     })
       .then((response) => response.json())
       .then((data) => {

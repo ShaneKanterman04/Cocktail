@@ -14,13 +14,18 @@ function addCocktail(cocktail) {
   name.innerText = cocktail.strDrink
   item.appendChild(name)
 
+  // Create expanded div
+  let expandedDiv = document.createElement("div")
+  expandedDiv.id = "expandedDiv"
+  item.appendChild(expandedDiv)
+
   //Store cocktail data
   item.data = cocktail
   item.expanded = false
 
   document.getElementsByClassName("cocktail-list")[0].appendChild(item)
-  item.addEventListener("mouseover", () => { expand(item) })
-  item.addEventListener("mouseout", () => { collapse(item) })
+  item.addEventListener("mouseover", () => { expand(item, expandedDiv) })
+  item.addEventListener("mouseout", () => { collapse(item, expandedDiv) })
 }
 
 function getRandomCoctails(x) {
@@ -36,10 +41,14 @@ function getRandomCoctails(x) {
   }
 }
 
-function expand(item) {
+function expand(item, expandedDiv) {
   if (!item.expanded) {
-    console.log(item.data)
-    let list = document.createElement("ol")
+    item.expanded = true
+    
+    // Init list
+    const list = document.createElement("ol")
+
+    // Add all ingredients to list
     for (let i = 1; i <= 15; i++) {
       if (item.data["strIngredient" + i] != null) {
         let ingredient = document.createElement("li")
@@ -47,19 +56,28 @@ function expand(item) {
         list.appendChild(ingredient)
       }
     }
-    let instructions = document.createElement("li")
-    instructions.innerText = item.data.strInstructions
-    list.appendChild(instructions)
-    item.appendChild(list)
+    
+    let header = document.createElement('h4')
+    header.innerHTML = "Ingrediants"
 
-    item.expanded = true
+    expandedDiv.appendChild(header)
+
+    expandedDiv.appendChild(list)
+
+    const instructions = document.createElement("p")
+    instructions.innerText = item.data.strInstructions
+
+    header = document.createElement('h4')
+    header.innerHTML = "Instructions"
+    expandedDiv.appendChild(header)
+    expandedDiv.appendChild(instructions)
   }
 
 }
 
-function collapse(item) {
+function collapse(item, expandedDiv) {
   if (item.expanded) {
-    item.removeChild(item.lastChild)
+    expandedDiv.innerHTML = ""
     item.expanded = false
   }
 }

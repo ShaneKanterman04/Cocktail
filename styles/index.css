@@ -57,7 +57,7 @@
     align-items: center;
     justify-content: center;
     width: 200px;
-    height: 300;
+    height: 200px;
     margin: 10px;
     padding: 10px;
     background-color: #1A1726;
@@ -96,7 +96,7 @@ a:link {
 
 body {
     height: 100%;
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     padding: 0;
     background-color: #5F9EE1;

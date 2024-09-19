@@ -99,6 +99,9 @@ document.getElementById('savedBtn').addEventListener('click', () => {
 })
 
 function saveRecipe(item) {
+  if(confirm('Save?') === false) {
+    return
+  }
   let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || []
   savedCocktails.push(item.data)
   localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails))

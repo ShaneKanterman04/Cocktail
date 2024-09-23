@@ -99,7 +99,6 @@
 }
 
 .cocktail-item:active {
-    transition: .1s;
     width: 420px;
     height: 500px;
 }
@@ -131,27 +130,13 @@ a:link {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-.navButton {
-    background-color: #5268CC;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
     margin: -10px 2px;
     cursor: pointer;
     border-radius: 5px;
     width:50%;
 }
 
-.navButton:hover {
+.button:hover {
     transition: .05s;
     background-color: #6579d1;
     width: 40%;

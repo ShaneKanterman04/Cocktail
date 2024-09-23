@@ -1,5 +1,5 @@
 // Function to add a cocktail to the list
-function addCocktail(cocktail) {
+function addCocktail(cocktail, saved) {
   // Create a container for the cocktail item
   let item = document.createElement("div");
   item.className = "cocktail-item";
@@ -22,7 +22,8 @@ function addCocktail(cocktail) {
 
   // Add saved indicator
   let savedIndicator = document.createElement("img");
-  savedIndicator.src = "imgs/unsaved.png"; // Set saved indicator source
+  const imgPath = saved ? 'imgs/saved.png' : 'imgs/unsaved.png';
+  savedIndicator.src = imgPath; // Set saved indicator source
   savedIndicator.width = 20; // Set saved indicator width
   item.appendChild(savedIndicator); // Append saved indicator to the item
 
@@ -102,7 +103,7 @@ function displaySaved() {
   document.getElementsByClassName('cocktail-list')[0].innerHTML = '';
   document.getElementById('clearBtn').style.display = 'block';
   let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || [];
-  savedCocktails.forEach(cocktail => addCocktail(cocktail));
+  savedCocktails.forEach(cocktail => addCocktail(cocktail,true));
 }
 
 // Event listener to display saved cocktails
@@ -116,12 +117,14 @@ function saveRecipe(item) {
   if (index === -1) {
     savedCocktails.push(item.data); // Add new cocktail
     item.lastChild.src = 'imgs/saved.png'; // Update saved indicator
+    localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails)); // Save updated list
   } else {
     savedCocktails.splice(index, 1); // Remove cocktail
     item.lastChild.src = 'imgs/unsaved.png'; // Update saved indicator
+    localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails)); // Save updated list
+    displaySaved() // Refresh display
   }
-
-  localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails)); // Save updated list
+  
 }
 
 // Clears all saved cocktails

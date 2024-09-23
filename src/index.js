@@ -41,6 +41,7 @@ function addCocktail(cocktail) {
 
 // Fetches random cocktails from the API
 function getRandomCoctails(x) {
+  document.getElementById('page').innerText = "Find Cocktails!";  // Change the page title
   const headers = new Headers();
   headers.append("Access-Control-Allow-Origin", "*");
 
@@ -108,7 +109,8 @@ document.getElementById("refreshBtn").addEventListener("click", () => {
 // Initial call to load 60 random cocktails when the page loads
 getRandomCoctails(10);
 
-function displaySaved(){
+function displaySaved() {
+  document.getElementById('page').innerText = "Saved Cocktails";  // Change the page title
   document.getElementById('refreshBtn').style.display = 'none';  // Hide the saved button
   document.getElementsByClassName('cocktail-list')[0].innerHTML = '';  // Clear current cocktail list
   let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || [];  // Get saved cocktails from local storage
@@ -126,25 +128,29 @@ document.getElementById('savedBtn').addEventListener('click', () => {
 function saveRecipe(item) {
   let removed = false
   JSON.parse(localStorage.getItem('savedCocktails')).forEach(e => {
-      if (e.strDrink === item.data.strDrink){
-        if(confirm("You already saved this cocktail! Do you want to remove it?")){
-          let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || [];
-          savedCocktails = savedCocktails.filter(e => e.strDrink !== item.data.strDrink);
-          localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails));
-          displaySaved();
-          removed = true;
-          item.lastChild.src = 'imgs/unsaved.png';
-        }
-      }
+    if (e.strDrink === item.data.strDrink) {
+
+      let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || [];
+      savedCocktails = savedCocktails.filter(e => e.strDrink !== item.data.strDrink);
+      localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails));
+      //displaySaved();
+      removed = true;
+      item.lastChild.src = 'imgs/unsaved.png';
+
+    }
   })
-  if(removed){
-    return;
-  }
-  if (confirm('Save?') === false ) {  // Confirm if the user wants to save
+  if (removed) {
     return;
   }
   let savedCocktails = JSON.parse(localStorage.getItem('savedCocktails')) || [];  // Get saved cocktails from local storage
   savedCocktails.push(item.data);  // Add the cocktail to the saved list
   localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails));// Save updated list to local storage
   item.lastChild.src = 'imgs/saved.png';  // Change the saved indicator to saved
+  
+  item.lastChild.style.animation = null;  // Stop the animation
+  item.lastChild.style.animation = 'likeA .2s';  // Stop the animation
+  item.lastChild.style.animation = 'likeB .2s';  // Stop the animation
 }
+
+
+

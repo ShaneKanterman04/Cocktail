@@ -7,6 +7,30 @@
     }
 }
 
+@keyframes likeA {
+    from {
+        width: 20px;
+        border: #1A1726;
+        border-width: 3px;
+    }
+    to {
+        width: 40px;
+    }
+    
+}
+
+@keyframes likeB {
+    from {
+        width: 40px;
+        border: #1A1726;
+        border-width: 3px;
+    }
+    to {
+        width: 20px;
+    }
+    
+}
+
 .header {
     grid-area: header;
     background-color: #5268CC;
@@ -76,7 +100,6 @@
 
 .cocktail-item:active {
     transition: .1s;
-    background-color: #ff0000;
     width: 420px;
     height: 500px;
 }
@@ -92,15 +115,53 @@ a:link {
   }
   
   /* mouse over link */
-  a:hover {
-    font-size: larger;
-  }
+  
   
   /* selected link */
   a:active {
     
   }
 
+.button {
+    background-color: #5268CC;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.navButton {
+    background-color: #5268CC;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: -10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    width:50%;
+}
+
+.navButton:hover {
+    transition: .05s;
+    background-color: #6579d1;
+    width: 40%;
+    font-size: small;
+}
+
+#page{
+    color: white;
+    font-size: 20px;
+}
 
 body {
     height: 100%;

@@ -1,3 +1,5 @@
+var state = 'new'
+
 // Function to add a cocktail to the list
 function addCocktail(cocktail, saved) {
   // Create a container for the cocktail item
@@ -42,6 +44,7 @@ function addCocktail(cocktail, saved) {
 
 // Fetches random cocktails from the API
 function getRandomCoctails(x) {
+  state = 'new'
   document.getElementById('clearBtn').style.display = 'none'; 
   document.getElementById('page').innerText = "Find Cocktails!"; // Change the page title
   const headers = new Headers();
@@ -98,6 +101,7 @@ getRandomCoctails(10);
 
 // Displays saved cocktails
 function displaySaved() {
+  state = 'saved'
   document.getElementById('page').innerText = "Saved Cocktails";
   document.getElementById('refreshBtn').style.display = 'none';
   document.getElementsByClassName('cocktail-list')[0].innerHTML = '';
@@ -122,7 +126,10 @@ function saveRecipe(item) {
     savedCocktails.splice(index, 1); // Remove cocktail
     item.lastChild.src = 'imgs/unsaved.png'; // Update saved indicator
     localStorage.setItem('savedCocktails', JSON.stringify(savedCocktails)); // Save updated list
-    displaySaved() // Refresh display
+    if(state === 'saved'){
+      displaySaved() // Refresh display
+    }
+    
   }
   
 }
